@@ -1,0 +1,19 @@
+{
+  "name": "minel-agent-framework",
+  "version": "1.0.0",
+  "description": "A generic multi-agent pipeline toolkit: declared Stations, schema-checked Couplings between them, a deterministic-first Gate (the Floor, the Rungs, the Cutoff), and an append-only Trail with a read-only Loopback digest. Deterministic, zero runtime dependencies, no live model calls required to run the demo.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "minel-agents": "bin/minel.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "demo": "node bin/minel.js demo"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

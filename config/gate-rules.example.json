@@ -1,0 +1,8 @@
+{
+  "_comment": "A starting Floor rule set for a new project. Copy this file, rename the Station keys to your own Stations, and drop or add rules per Station. Rule types shipped: required-fields, length-bound, must-be-true, duplicate-detection — see src/floor.js.",
+  "YourStationName": {
+    "floorRules": [
+      { "name": "output-required", "type": "required-fields", "fields": ["your_required_field"] }
+    ]
+  }
+}

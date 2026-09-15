@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Drafter",
+    "purpose": "Turn a topic and a brief into a first draft.",
+    "input_contract": {
+      "type": "object",
+      "required": ["topic", "brief"],
+      "properties": {
+        "topic": { "type": "string", "minLength": 1 },
+        "brief": { "type": "string", "minLength": 1 }
+      }
+    },
+    "output_contract": {
+      "type": "object",
+      "required": ["draft", "word_count"],
+      "properties": {
+        "draft": { "type": "string", "minLength": 1 },
+        "word_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "prompt_template": "Write a short draft on {{topic}} following this brief: {{brief}}. Documentary only — the framework never executes this string; wire in your own model call in the executor."
+  },
+  {
+    "name": "Reviewer",
+    "purpose": "Read the draft and decide whether it clears the bar to publish.",
+    "input_contract": {
+      "type": "object",
+      "required": ["draft", "word_count"],
+      "properties": {
+        "draft": { "type": "string", "minLength": 1 },
+        "word_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "output_contract": {
+      "type": "object",
+      "required": ["draft", "approved", "comments"],
+      "properties": {
+        "draft": { "type": "string", "minLength": 1 },
+        "approved": { "type": "boolean" },
+        "comments": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "prompt_template": "Review this draft against the house bar and return approved true/false with comments. Documentary only."
+  },
+  {
+    "name": "Publisher",
+    "purpose": "Publish an approved draft; refuse an unapproved one.",
+    "input_contract": {
+      "type": "object",
+      "required": ["draft", "approved", "comments"],
+      "properties": {
+        "draft": { "type": "string", "minLength": 1 },
+        "approved": { "type": "boolean" },
+        "comments": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "output_contract": {
+      "type": "object",
+      "required": ["published", "url"],
+      "properties": {
+        "published": { "type": "boolean" },
+        "url": { "type": "string" }
+      }
+    },
+    "prompt_template": "Publish the draft if approved is true; otherwise return published: false. Documentary only."
+  }
+]

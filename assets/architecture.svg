@@ -1,0 +1,98 @@
+<svg width="980" height="600" viewBox="0 0 980 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Minel Agent Framework architecture: a Station's output passes through the Gate (the Floor, then an optional scorer, mapped to the Rungs), a Cutoff can force every Gate to Hold, a passing output is checked by the Coupling before the next Station runs, every step appends to the Trail, and the Loopback reads the Trail back into the next run">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8b98a5"/>
+    </marker>
+    <marker id="arrowPass" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3fb950"/>
+    </marker>
+    <marker id="arrowFail" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f85149"/>
+    </marker>
+    <marker id="arrowLoop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#58a6ff"/>
+    </marker>
+  </defs>
+
+  <rect width="980" height="600" fill="#0d1117"/>
+
+  <!-- Cutoff, top, overrides the Gate -->
+  <rect x="340" y="24" width="300" height="56" rx="10" fill="#2a1416" stroke="#f85149" stroke-width="2"/>
+  <text x="490" y="49" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#f85149">The Cutoff</text>
+  <text x="490" y="66" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#d29a99">one flag forces every Gate to Hold, checked first, every time</text>
+  <line x1="490" y1="80" x2="490" y2="118" stroke="#f85149" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrowFail)"/>
+
+  <!-- Station A -->
+  <rect x="24" y="140" width="150" height="90" rx="12" fill="#151b23" stroke="#5a6472" stroke-width="1.5"/>
+  <text x="99" y="178" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#f0f3f7">Station</text>
+  <text x="99" y="197" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8b98a5">declared purpose +</text>
+  <text x="99" y="212" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8b98a5">input / output contract</text>
+  <line x1="174" y1="185" x2="216" y2="185" stroke="#8b98a5" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Gate: Floor + Rungs -->
+  <rect x="220" y="118" width="220" height="134" rx="12" fill="#1c2530" stroke="#f0b429" stroke-width="2"/>
+  <text x="330" y="146" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#f0f3f7">The Gate</text>
+  <text x="330" y="166" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#8b98a5">the Floor runs first, always</text>
+  <text x="330" y="182" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#8b98a5">deterministic, no model call</text>
+  <line x1="252" y1="192" x2="408" y2="192" stroke="#3a4552" stroke-width="1"/>
+  <text x="330" y="212" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#8b98a5">optional scorer, if the Floor passes</text>
+  <text x="330" y="234" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#e3b341">Rungs: Clear · Flag · Hold</text>
+
+  <!-- Gate -> Coupling (pass) -->
+  <line x1="440" y1="170" x2="500" y2="170" stroke="#3fb950" stroke-width="2" marker-end="url(#arrowPass)"/>
+  <text x="470" y="160" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#3fb950">Clear / Flag</text>
+
+  <!-- Gate -> Trail (hold) -->
+  <line x1="300" y1="252" x2="300" y2="400" stroke="#f85149" stroke-width="2" marker-end="url(#arrowFail)"/>
+  <text x="316" y="330" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#f85149">Hold</text>
+
+  <!-- Coupling -->
+  <rect x="504" y="120" width="180" height="100" rx="12" fill="#1c2530" stroke="#f0b429" stroke-width="2"/>
+  <text x="594" y="150" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#f0f3f7">The Coupling</text>
+  <text x="594" y="170" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8b98a5">checks the shape at the</text>
+  <text x="594" y="185" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8b98a5">boundary between Stations</text>
+  <text x="594" y="203" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#e3b341">no match = bounced back</text>
+
+  <!-- Coupling -> Trail (reject) -->
+  <line x1="594" y1="220" x2="594" y2="400" stroke="#f85149" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowFail)"/>
+  <text x="610" y="330" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#f85149">bounced back</text>
+
+  <!-- Coupling -> Station B (match) -->
+  <line x1="684" y1="165" x2="740" y2="165" stroke="#3fb950" stroke-width="2" marker-end="url(#arrowPass)"/>
+  <text x="712" y="155" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#3fb950">match</text>
+
+  <!-- Station B -->
+  <rect x="744" y="120" width="150" height="90" rx="12" fill="#151b23" stroke="#5a6472" stroke-width="1.5"/>
+  <text x="819" y="158" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#f0f3f7">Station</text>
+  <text x="819" y="177" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8b98a5">next in the pipeline,</text>
+  <text x="819" y="192" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8b98a5">same Gate + Coupling checks</text>
+
+  <!-- Station B onward, repeats -->
+  <line x1="819" y1="210" x2="819" y2="260" stroke="#8b98a5" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="840" y="240" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8b98a5">repeats per Station</text>
+
+  <!-- Also Station B feeds Trail -->
+  <line x1="784" y1="210" x2="700" y2="400" stroke="#3a4552" stroke-width="1.2" stroke-dasharray="2 3"/>
+
+  <!-- Trail -->
+  <rect x="220" y="400" width="540" height="76" rx="10" fill="#151b23" stroke="#5a6472" stroke-width="1.5"/>
+  <text x="490" y="432" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#f0f3f7">The Trail</text>
+  <text x="490" y="454" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#8b98a5">append-only · role, input hash, output, Gate verdict, timestamp, run ID</text>
+
+  <!-- Trail -> Loopback -->
+  <line x1="300" y1="476" x2="300" y2="520" stroke="#58a6ff" stroke-width="1.8"/>
+  <line x1="300" y1="520" x2="150" y2="520" stroke="#58a6ff" stroke-width="1.8"/>
+  <line x1="150" y1="520" x2="150" y2="480" stroke="#58a6ff" stroke-width="1.8"/>
+
+  <!-- Loopback -->
+  <rect x="24" y="500" width="252" height="80" rx="12" fill="#132030" stroke="#58a6ff" stroke-width="2"/>
+  <text x="150" y="528" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#f0f3f7">The Loopback</text>
+  <text x="150" y="548" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8b98a5">read-only digest: recent pass/fail</text>
+  <text x="150" y="562" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#8b98a5">per Station, latest failure reasons</text>
+
+  <!-- Loopback -> Station A, next run -->
+  <path d="M 24,540 C 8,540 8,180 24,180" fill="none" stroke="#58a6ff" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#arrowLoop)"/>
+  <text x="20" y="360" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#58a6ff" transform="rotate(-90 20 360)">read into the next run's context</text>
+
+  <text x="490" y="596" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="10" fill="#5a6472">v1: the Loopback only reads — it never rewrites a Station or a Coupling on its own</text>
+</svg>

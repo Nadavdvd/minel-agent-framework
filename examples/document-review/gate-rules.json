@@ -1,0 +1,18 @@
+{
+  "Drafter": {
+    "floorRules": [
+      { "name": "draft-required", "type": "required-fields", "fields": ["draft", "word_count"] },
+      { "name": "draft-length", "type": "length-bound", "field": "draft", "min": 10 }
+    ]
+  },
+  "Reviewer": {
+    "floorRules": [
+      { "name": "review-required", "type": "required-fields", "fields": ["draft", "comments"] }
+    ]
+  },
+  "Publisher": {
+    "floorRules": [
+      { "name": "must-publish", "type": "must-be-true", "field": "published" }
+    ]
+  }
+}
